@@ -13,5 +13,8 @@
   "devDependencies": {
     "mkdirp": "^0.5.1",
     "node-sass": "^4.5.3"
+  },
+  "scripts": {
+    "build": "node build.js"
   }
 }
