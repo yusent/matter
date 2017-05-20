@@ -1,0 +1,13 @@
+{
+  "name": "matter",
+  "version": "0.0.0",
+  "description": "A CSS/JS Framework based on Material Design",
+  "main": "matter.js",
+  "repository": {
+    "url": "https://github.com/yusent/matter.git",
+    "type": "git"
+  },
+  "bugs": "https://github.com/yusent/matter/issues",
+  "author": "Yusent Chig <yusent@protonmail.com>",
+  "license": "MIT"
+}
