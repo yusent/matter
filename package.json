@@ -9,5 +9,8 @@
   },
   "bugs": "https://github.com/yusent/matter/issues",
   "author": "Yusent Chig <yusent@protonmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "node-sass": "^4.5.3"
+  }
 }
