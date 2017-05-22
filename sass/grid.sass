@@ -1,0 +1,49 @@
+@mixin col-classes($size, $columns: 12)
+  @for $i from 1 through $columns
+    $percentage: $i / $columns * 100 + %
+
+    &.mt-#{$size}#{$i}
+      width: calc(#{$percentage} - #{$gutter * ($columns + $i) / $columns})
+
+    &.mt-#{$size}#{$i}-offset
+      margin-left: calc(#{$percentage} - #{$gutter * ($i - $columns) / $columns})
+
+.mt-row
+  margin: 0 auto
+
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+  .mt-col
+    float: left
+    box-sizing: border-box
+    margin: 0 0 $gutter $gutter
+    padding: $gutter / 2
+
+    &:last-child
+      margin-right: $gutter
+
+    @include col-classes("xxs", 4)
+
+    @media #{$xs-or-larger}
+      @include col-classes("xs", 4)
+
+    @media #{$s-or-larger}
+      @include col-classes("s", 8)
+
+    @media #{$m-or-larger}
+      @include col-classes("m")
+
+    @media #{$l-or-larger}
+      @include col-classes("l")
+
+    @media #{$xl-or-larger}
+      @include col-classes("xl")
+
+    @media #{$xxl-or-larger}
+      @include col-classes("xxl")
+
+    @media #{$xxl-or-larger}
+      @include col-classes("xxxl")
