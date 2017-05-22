@@ -1,0 +1,24 @@
+//breakpoints
+$xxs-breakpoint:  480
+$xs-breakpoint :  600
+$s-breakpoint  :  840
+$m-breakpoint  :  960
+$l-breakpoint  : 1280
+$xl-breakpoint : 1440
+$xxl-breakpoint: 1600
+
+$xs-or-larger  : "only screen and (min-width: #{$xxs-breakpoint}px)"
+$s-or-larger   : "only screen and (min-width: #{$xs-breakpoint}px)"
+$m-or-larger   : "only screen and (min-width: #{$s-breakpoint}px)"
+$l-or-larger   : "only screen and (min-width: #{$m-breakpoint}px)"
+$xl-or-larger  : "only screen and (min-width: #{$l-breakpoint}px)"
+$xxl-or-larger : "only screen and (min-width: #{$xl-breakpoint}px)"
+$xxxl-or-larger: "only screen and (min-width: #{$xxl-breakpoint}px)"
+
+$xxs-or-smaller: "only screen and (max-width: #{$xxs-breakpoint - 1}px)"
+$xs-or-smaller : "only screen and (max-width: #{$xs-breakpoint - 1}px)"
+$s-or-smaller  : "only screen and (max-width: #{$s-breakpoint - 1}px)"
+$m-or-smaller  : "only screen and (max-width: #{$m-breakpoint - 1}px)"
+$l-or-smaller  : "only screen and (max-width: #{$l-breakpoint - 1}px)"
+$xl-or-smaller : "only screen and (max-width: #{$xl-breakpoint - 1}px)"
+$xxl-or-smaller: "only screen and (max-width: #{$xxl-breakpoint - 1}px)"
