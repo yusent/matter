@@ -1,8 +1,32 @@
 let assert = require('assert');
+let rows = [
+  ['xxs1', 'xxs3'],
+  ['s2', 's6'],
+  ['m10', 'm2'],
+];
 
-describe('mocha tests', function () {
-  it('has document', function () {
-    let div = document.createElement('div');
-    assert.equal(div.nodeName, 'DIV');
+describe('grid system', function () {
+  describe('mt-column', function () {
+    it('displays side by side with siblings when they fit', function () {
+      rows.forEach(function (sizes) {
+        let row = document.createElement('div');
+        row.className = 'mt-row';
+
+        sizes.forEach(function (size) {
+          let col = document.createElement('div');
+          col.className = `mt-col mt-${size}`;
+          col.appendChild(document.createTextNode(size));
+          row.appendChild(col);
+        });
+
+        document.body.appendChild(row);
+        let rowRect = row.getBoundingClientRect();
+
+        for (let col of row.childNodes) {
+          let colRect = col.getBoundingClientRect();
+          assert.equal(colRect.top, rowRect.top);
+        }
+      });
+    });
   });
 });
