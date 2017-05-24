@@ -430,7 +430,7 @@
   }
 }
 
-@media only screen and (min-width: 1440px) {
+@media only screen and (min-width: 1600px) {
   .mt-row .mt-col.mt-xxxl1 {
     width: calc(8.33333% - 17.33333px);
   }
