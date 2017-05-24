@@ -13,22 +13,24 @@ let rows = [
   ['xxxl11', 'xxxl1'],
 ];
 
-function fits(displaySize, colSize) {
-  let _colSize = colSize.replace(/^mt-([a-z]+)\d+$/, '$1');
-  return displaySizes.indexOf(_colSize) <= displaySizes.indexOf(displaySize);
+function fits(displaySize) {
+  return function (colSize) {
+    let _colSize = /[a-z]+/.exec(colSize)[0];
+    return displaySizes.indexOf(_colSize) <= displaySizes.indexOf(displaySize);
+  };
 }
 
-for (let size of displaySizes) {
+function testSize(size) {
   describe(`grid system when display size is ${size}`, function () {
-    describe('mt-column', function () {
+    describe('column', function () {
       it('displays side by side with siblings when they fit', function () {
         for (let columnSizes of rows) {
           let row = document.createElement('div');
-          row.className = 'mt-row';
+          row.className = 'row';
 
           for (let columnSize of columnSizes) {
             let col = document.createElement('div');
-            col.className = `mt-col mt-${columnSize}`;
+            col.className = `col ${columnSize}`;
             col.appendChild(document.createTextNode(columnSize));
             row.appendChild(col);
           }
@@ -39,9 +41,9 @@ for (let size of displaySizes) {
           for (let col of row.childNodes) {
             let colRect = col.getBoundingClientRect();
             let itFits = col.className
-              .replace('mt-col ', '')
+              .replace('col ', '')
               .split(/\s/)
-              .some(c => fits(size, c));
+              .some(fits(size));
 
             if (itFits) {
               assert.equal(colRect.top, rowRect.top);
@@ -57,3 +59,5 @@ for (let size of displaySizes) {
     });
   });
 }
+
+displaySizes.forEach(testSize);
