@@ -2,13 +2,13 @@
   @for $i from 1 through $columns
     $percentage: $i / $columns * 100 + %
 
-    &.#{$prefix}#{$size}#{$i}
+    &.#{$namespace}#{$size}#{$i}
       width: calc(#{$percentage} - #{$gutter * ($columns + $i) / $columns})
 
-    &.#{$prefix}#{$size}#{$i}-offset
+    &.#{$namespace}#{$size}#{$i}-offset
       margin-left: calc(#{$percentage} - #{$gutter * ($i - $columns) / $columns})
 
-.#{$prefix}row
+.#{$namespace}row
   margin: 0 auto
 
   &:after
@@ -16,7 +16,7 @@
     display: table
     clear: both
 
-  .#{$prefix}col
+  .#{$namespace}col
     float: left
     box-sizing: border-box
     margin: 0 0 $gutter $gutter
