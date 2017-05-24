@@ -1,6 +1,8 @@
 {
+  "browser": true,
   "curly": true,
   "esversion": 6,
+  "mocha": true,
   "node": true,
   "undef": true,
   "unused": true
