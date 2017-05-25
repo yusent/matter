@@ -311,11 +311,11 @@ $colors: (
 
 @each $color_name, $color in $colors {
   @each $number, $color_value in $color {
-    .#{$color_name}-#{$number} {
+    .#{$namespace}#{$color_name}-#{$number} {
       background-color: $color_value;
     }
 
-    .#{$color_name}-#{$number}-text {
+    .#{$namespace}#{$color_name}-#{$number}-text {
       color: $color_value;
     }
   }
