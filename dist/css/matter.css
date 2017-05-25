@@ -2543,7 +2543,7 @@ html {
   }
 }
 
-[class$="-btn"] {
+.raised-btn {
   background-color: #ff5722;
   border: none;
   cursor: pointer;
@@ -2555,7 +2555,7 @@ html {
   text-decoration: none;
 }
 
-[class$="-btn"]::-moz-focus-inner {
+.raised-btn::-moz-focus-inner {
   border: 0;
 }
 
