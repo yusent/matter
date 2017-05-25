@@ -1,0 +1,35 @@
+[class$="-btn"]
+  background-color: $secondary-color
+  border: none
+  cursor: pointer
+  font-family: "Roboto", sans-serif
+  font-size: 14px
+  font-weight: 500
+  outline: none
+  text-align: center
+  text-decoration: none
+
+  &::-moz-focus-inner
+    border: 0
+
+.raised-btn
+  border-radius: 2px
+  box-sizing: border-box
+  height: 36px
+  line-height: 36px
+  margin: 0 8px
+  min-width: 80px
+  padding: 0 8px
+  text-transform: uppercase
+  transition: 0.2s ease-out
+  vertical-align: middle
+  will-change: box-shadow
+
+  &:active
+    box-shadow: 0 0 8px rgba(#000, 0.18), 0 8px 16px rgba(#000, 0.36)
+
+  &:focus:not(:hover), &:active
+    background-color: darken($secondary-color, 14%)
+
+  &:hover:not(:active)
+    box-shadow: 0 2px 2px 0 rgba(#000, 0.14), 0 3px 1px -2px rgba(#000, 0.2), 0 1px 5px 0 rgba(#000, 0.12)
