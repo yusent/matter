@@ -27,11 +27,14 @@
   vertical-align: middle
   will-change: box-shadow
 
-  &:active
+  &:active:not([disabled])
     box-shadow: 0 0 8px rgba(#000, 0.18), 0 8px 16px rgba(#000, 0.36)
 
   &:focus:not(:hover), &:active
     background-color: darken($secondary-color, 14%)
 
-  &:hover:not(:active)
+  &:hover:not(:active):not([disabled])
     box-shadow: 0 2px 2px 0 rgba(#000, 0.14), 0 3px 1px -2px rgba(#000, 0.2), 0 1px 5px 0 rgba(#000, 0.12)
+
+  &[disabled]
+    background-color: rgba(#000, 0.12)
