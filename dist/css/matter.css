@@ -2594,4 +2594,6 @@ html {
 
 .raised-btn[disabled] {
   background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+  pointer-events: none;
 }
