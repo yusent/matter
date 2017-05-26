@@ -1,6 +1,5 @@
-// Shared button styles
-.#{$namespace}raised-btn
-  background-color: $secondary-color
+.#{$namespace}raised-btn,
+.#{$namespace}flat-btn
   border: none
   color: #000
   cursor: pointer
@@ -16,7 +15,8 @@
   &::-moz-focus-inner
     border: 0
 
-.#{$namespace}raised-btn
+.#{$namespace}raised-btn,
+.#{$namespace}flat-btn
   border-radius: 2px
   box-sizing: border-box
   height: 36px
@@ -25,15 +25,22 @@
   min-width: 80px
   padding: 0 8px
   text-transform: uppercase
-  transition: 0.2s ease-out
   vertical-align: middle
+
+.#{$namespace}flat-btn
+  background: none
+  transition: background-color 0.3s ease-out
+  will-change: background-color
+
+  &:active
+    background-color: rgba(#999, 0.4)
+
+.#{$namespace}raised-btn
+  background-color: $secondary-color
   will-change: box-shadow
 
   &:active:not([disabled])
-    box-shadow: 0 0 8px rgba(#000, 0.18), 0 8px 16px rgba(#000, 0.36)
-
-  &:focus:not(:hover), &:active
-    background-color: darken($secondary-color, 14%)
+    box-shadow: 0 4px 8px rgba(#000, 0.34)
 
   &:hover:not(:active):not([disabled])
     box-shadow: 0 2px 2px 0 rgba(#000, 0.14), 0 3px 1px -2px rgba(#000, 0.2), 0 1px 5px 0 rgba(#000, 0.12)

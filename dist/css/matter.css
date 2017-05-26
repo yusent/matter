@@ -2543,9 +2543,10 @@ html {
   }
 }
 
-.raised-btn {
-  background-color: #ff5722;
+.raised-btn,
+.flat-btn {
   border: none;
+  color: #000;
   cursor: pointer;
   display: inline-block;
   font-family: "Roboto", sans-serif;
@@ -2562,11 +2563,13 @@ html {
   user-select: none;
 }
 
-.raised-btn::-moz-focus-inner {
+.raised-btn::-moz-focus-inner,
+.flat-btn::-moz-focus-inner {
   border: 0;
 }
 
-.raised-btn {
+.raised-btn,
+.flat-btn {
   border-radius: 2px;
   box-sizing: border-box;
   height: 36px;
@@ -2575,17 +2578,26 @@ html {
   min-width: 80px;
   padding: 0 8px;
   text-transform: uppercase;
-  transition: 0.2s ease-out;
   vertical-align: middle;
+}
+
+.flat-btn {
+  background: none;
+  transition: background-color 0.3s ease-out;
+  will-change: background-color;
+}
+
+.flat-btn:active {
+  background-color: rgba(153, 153, 153, 0.4);
+}
+
+.raised-btn {
+  background-color: #ff5722;
   will-change: box-shadow;
 }
 
 .raised-btn:active:not([disabled]) {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.18), 0 8px 16px rgba(0, 0, 0, 0.36);
-}
-
-.raised-btn:focus:not(:hover), .raised-btn:active {
-  background-color: #da3400;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.34);
 }
 
 .raised-btn:hover:not(:active):not([disabled]) {
