@@ -20,12 +20,7 @@ sass.render({
   }
 });
 
-browserify('js/matter.js')
-  .transform(['babelify', {
-    presets: ['es2015'],
-  }], {
-    standalone: 'Matter',
-  })
+browserify('js/matter.js', { standalone: 'Matter' })
   .bundle()
   .on('end', function () {
     console.log('dist/js/matter.js generated!');
