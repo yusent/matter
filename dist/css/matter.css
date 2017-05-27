@@ -2543,6 +2543,15 @@ html {
   }
 }
 
+@keyframes ripple {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 .raised-btn,
 .flat-btn {
   border: none;
@@ -2572,12 +2581,10 @@ html {
 
 .raised-btn .ripple,
 .flat-btn .ripple {
+  animation: ripple 0.3s;
   background-color: rgba(0, 0, 0, 0.12);
   border-radius: 50%;
-  height: 200%;
-  left: -50%;
   position: absolute;
-  top: -50%;
   width: 200%;
 }
 
