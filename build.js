@@ -1,3 +1,4 @@
+let browserify = require('browserify');
 let fs = require('fs');
 let sass = require('node-sass');
 
@@ -18,3 +19,20 @@ sass.render({
     });
   }
 });
+
+browserify('js/matter.js')
+  .transform(['babelify', {
+    presets: ['es2015'],
+  }], {
+    standalone: 'Matter',
+  })
+  .bundle()
+  .on('end', function () {
+    console.log('dist/js/matter.js generated!');
+  })
+  .pipe(
+    fs.createWriteStream('dist/js/matter.js')
+      .on('error', function (writeError) {
+        console.log(writeError);
+      })
+  );
