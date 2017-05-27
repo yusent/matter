@@ -7,21 +7,31 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (button) {
   (0, _functions.addHandler)(button, 'mouseleave', function () {
-    button.classList.remove('pressed');
+    return removeRippleFrom(button);
   });
 
   (0, _functions.addHandler)(button, 'mouseup', function () {
-    button.classList.remove('pressed');
+    return removeRippleFrom(button);
   });
 
   (0, _functions.addHandler)(button, 'mousedown', function (event) {
     if (event.button !== 2) {
-      button.classList.add('pressed');
+      var ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      button.appendChild(ripple);
     }
   });
 };
 
 var _functions = require('./functions');
+
+function removeRippleFrom(button) {
+  var ripple = button.querySelector('.ripple');
+
+  if (ripple) {
+    button.removeChild(ripple);
+  }
+}
 
 },{"./functions":2}],2:[function(require,module,exports){
 'use strict';

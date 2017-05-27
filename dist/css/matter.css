@@ -2553,6 +2553,8 @@ html {
   font-size: 14px;
   font-weight: 500;
   outline: none;
+  overflow: hidden;
+  position: relative;
   text-align: center;
   text-decoration: none;
   -webkit-touch-callout: none;
@@ -2566,6 +2568,17 @@ html {
 .raised-btn::-moz-focus-inner,
 .flat-btn::-moz-focus-inner {
   border: 0;
+}
+
+.raised-btn .ripple,
+.flat-btn .ripple {
+  background-color: rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  height: 200%;
+  left: -50%;
+  position: absolute;
+  top: -50%;
+  width: 200%;
 }
 
 .raised-btn,

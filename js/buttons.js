@@ -1,17 +1,23 @@
 import { addHandler } from './functions';
 
-export default function (button) {
-  addHandler(button, 'mouseleave', function () {
-    button.classList.remove('pressed');
-  });
+function removeRippleFrom(button) {
+  let ripple = button.querySelector('.ripple');
 
-  addHandler(button, 'mouseup', function () {
-    button.classList.remove('pressed');
-  });
+  if (ripple) {
+    button.removeChild(ripple);
+  }
+}
+
+export default function (button) {
+  addHandler(button, 'mouseleave', () => removeRippleFrom(button));
+
+  addHandler(button, 'mouseup', () => removeRippleFrom(button));
 
   addHandler(button, 'mousedown', function (event) {
     if (event.button !== 2) {
-      button.classList.add('pressed');
+      let ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      button.appendChild(ripple);
     }
   });
 }
