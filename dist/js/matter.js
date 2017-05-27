@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Matter = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6,7 +6,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (button) {
-  (0, _functions.addHandler)(button, 'click', function () {});
+  (0, _functions.addHandler)(button, 'mouseleave', function () {
+    button.classList.remove('pressed');
+  });
+
+  (0, _functions.addHandler)(button, 'mouseup', function () {
+    button.classList.remove('pressed');
+  });
+
+  (0, _functions.addHandler)(button, 'mousedown', function (event) {
+    if (event.button !== 2) {
+      button.classList.add('pressed');
+    }
+  });
 };
 
 var _functions = require('./functions');
@@ -52,7 +64,7 @@ function initComponents(parentNode) {
   var _iteratorError = undefined;
 
   try {
-    for (var _iterator = parentNode.querySelectorAll('[class$="raised-btn"]')[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (var _iterator = parentNode.querySelectorAll('[class$="-btn"]')[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var button = _step.value;
 
       (0, _buttons2.default)(button);
@@ -189,4 +201,5 @@ if (!('classList' in Element.prototype)) {
   });
 }
 
-},{}]},{},[3]);
+},{}]},{},[3])(3)
+});
