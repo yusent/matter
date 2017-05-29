@@ -2579,8 +2579,7 @@ html {
   }
 }
 
-.raised-btn,
-.flat-btn {
+.raised-btn, .flat-btn {
   border: none;
   color: #000;
   cursor: pointer;
@@ -2601,13 +2600,11 @@ html {
   user-select: none;
 }
 
-.raised-btn::-moz-focus-inner,
-.flat-btn::-moz-focus-inner {
+.raised-btn::-moz-focus-inner, .flat-btn::-moz-focus-inner {
   border: 0;
 }
 
-.raised-btn .ripple,
-.flat-btn .ripple {
+.raised-btn .ripple, .flat-btn .ripple {
   -webkit-animation: ripple 0.4s ease-out;
   -moz-animation: ripple 0.4s ease-out;
   -o-animation: ripple 0.4s ease-out;
@@ -2619,13 +2616,11 @@ html {
   width: 200%;
 }
 
-.raised-btn .ripple.fading-out,
-.flat-btn .ripple.fading-out {
+.raised-btn .ripple.fading-out, .flat-btn .ripple.fading-out {
   opacity: 0;
 }
 
-.raised-btn,
-.flat-btn {
+.raised-btn, .flat-btn {
   border-radius: 2px;
   box-sizing: border-box;
   height: 36px;

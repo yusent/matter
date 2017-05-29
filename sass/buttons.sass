@@ -5,8 +5,7 @@
   to
     transform: scale(1)
 
-.#{$namespace}raised-btn,
-.#{$namespace}flat-btn
+.raised-btn, .flat-btn
   border: none
   color: #000
   cursor: pointer
@@ -35,8 +34,7 @@
     &.fading-out
       opacity: 0
 
-.#{$namespace}raised-btn,
-.#{$namespace}flat-btn
+.raised-btn, .flat-btn
   border-radius: 2px
   box-sizing: border-box
   height: 36px
@@ -47,14 +45,14 @@
   text-transform: uppercase
   vertical-align: middle
 
-.#{$namespace}flat-btn
+.flat-btn
   background: none
   transition: background-color 0.3s ease-out
 
   &:active
     background-color: rgba(#999, 0.4)
 
-.#{$namespace}raised-btn
+.raised-btn
   background-color: $secondary-color
 
   &:active:not([disabled])
