@@ -1,4 +1,4 @@
-@keyframes ripple
++keyframes(ripple)
   from
     transform: scale(0)
 
@@ -25,11 +25,15 @@
     border: 0
 
   .ripple
-    animation: ripple 0.3s
+    +animation(ripple 0.4s ease-out)
     background-color: rgba(#000, 0.12)
     border-radius: 50%
     position: absolute
+    transition: opacity 0.6s
     width: 200%
+
+    &.fading-out
+      opacity: 0
 
 .#{$namespace}raised-btn,
 .#{$namespace}flat-btn

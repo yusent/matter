@@ -1,36 +1,26 @@
-import { addHandler } from './functions';
-
-function unpress(button) {
-  button.classList.remove('pressed');
-  let ripple = button.querySelector('.ripple');
-
-  if (ripple && !ripple.classList.contains('animating')) {
-    button.removeChild(ripple);
-  }
-}
-
 export default function (button) {
-  addHandler(button, 'mouseleave', () => unpress(button));
+  let transitionEndHandler = event => button.removeChild(event.target);
 
-  addHandler(button, 'mouseup', () => unpress(button));
+  function unpressHandler() {
+    let ripples = button.querySelectorAll('.ripple');
 
-  addHandler(button, 'mousedown', function (event) {
+    for (let ripple of ripples) {
+      ripple.classList.add('fading-out');
+    }
+  }
+
+  button.addEventListener('transitionend', transitionEndHandler);
+  button.addEventListener('webkitTransitionEnd', transitionEndHandler);
+  button.addEventListener('mouseleave', unpressHandler);
+  button.addEventListener('mouseup', unpressHandler);
+
+  button.addEventListener('mousedown', function (event) {
     if (event.button !== 2) {
-      button.classList.add('pressed');
-
       let ripple = document.createElement('div');
-      ripple.className = 'ripple animating';
+      ripple.className = 'ripple';
       ripple.style.height = `${button.offsetWidth * 2}px`;
       ripple.style.top = `${event.pageY - this.offsetTop - button.offsetWidth}px`;
       ripple.style.left = `${event.pageX - this.offsetLeft - button.offsetWidth}px`;
-
-      addHandler(ripple, 'animationend', function () {
-        ripple.classList.remove('animating');
-
-        if (!button.classList.contains('pressed')) {
-          button.removeChild(ripple);
-        }
-      });
 
       button.appendChild(ripple);
     }

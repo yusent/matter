@@ -6,68 +6,58 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (button) {
-  (0, _functions.addHandler)(button, 'mouseleave', function () {
-    return unpress(button);
-  });
+  var transitionEndHandler = function transitionEndHandler(event) {
+    return button.removeChild(event.target);
+  };
 
-  (0, _functions.addHandler)(button, 'mouseup', function () {
-    return unpress(button);
-  });
+  function unpressHandler() {
+    var ripples = button.querySelectorAll('.ripple');
 
-  (0, _functions.addHandler)(button, 'mousedown', function (event) {
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = ripples[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var ripple = _step.value;
+
+        ripple.classList.add('fading-out');
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  }
+
+  button.addEventListener('transitionend', transitionEndHandler);
+  button.addEventListener('webkitTransitionEnd', transitionEndHandler);
+  button.addEventListener('mouseleave', unpressHandler);
+  button.addEventListener('mouseup', unpressHandler);
+
+  button.addEventListener('mousedown', function (event) {
     if (event.button !== 2) {
-      button.classList.add('pressed');
-
       var ripple = document.createElement('div');
-      ripple.className = 'ripple animating';
+      ripple.className = 'ripple';
       ripple.style.height = button.offsetWidth * 2 + 'px';
       ripple.style.top = event.pageY - this.offsetTop - button.offsetWidth + 'px';
       ripple.style.left = event.pageX - this.offsetLeft - button.offsetWidth + 'px';
-
-      (0, _functions.addHandler)(ripple, 'animationend', function () {
-        ripple.classList.remove('animating');
-
-        if (!button.classList.contains('pressed')) {
-          button.removeChild(ripple);
-        }
-      });
 
       button.appendChild(ripple);
     }
   });
 };
 
-var _functions = require('./functions');
-
-function unpress(button) {
-  button.classList.remove('pressed');
-  var ripple = button.querySelector('.ripple');
-
-  if (ripple && !ripple.classList.contains('animating')) {
-    button.removeChild(ripple);
-  }
-}
-
-},{"./functions":2}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.addHandler = addHandler;
-function addHandler(element, eventType, handler) {
-  if (element.addEventListener) {
-    element.addEventListener(eventType, handler, false);
-  } else if (el.attachEvent) {
-    // IE <= 8
-    element.attachEvent('on' + eventType, handler);
-  } else {
-    // Older browsers
-    element['on' + eventType] = handler;
-  }
-}
-
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -110,7 +100,98 @@ function initComponents(parentNode) {
   }
 }
 
-},{"./buttons":1,"./polyfill":4}],4:[function(require,module,exports){
+},{"./buttons":1,"./polyfill":3}],3:[function(require,module,exports){
+'use strict';
+
+require('./polyfill/class-list');
+
+require('./polyfill/add-or-remove-event-listener');
+
+},{"./polyfill/add-or-remove-event-listener":4,"./polyfill/class-list":5}],4:[function(require,module,exports){
+"use strict";
+
+if (!Element.prototype.addEventListener) {
+  var runListeners = function runListeners(oEvent) {
+    if (!oEvent) {
+      oEvent = window.event;
+    }
+
+    for (var iLstId = 0, iElId = 0, oEvtListeners = oListeners[oEvent.type]; iElId < oEvtListeners.aEls.length; iElId++) {
+      if (oEvtListeners.aEls[iElId] === this) {
+        for (iLstId; iLstId < oEvtListeners.aEvts[iElId].length; iLstId++) {
+          oEvtListeners.aEvts[iElId][iLstId].call(this, oEvent);
+        }
+        break;
+      }
+    }
+  };
+
+  var oListeners = {};
+
+  Element.prototype.addEventListener = function (sEventType, fListener) {
+    if (oListeners.hasOwnProperty(sEventType)) {
+      var oEvtListeners = oListeners[sEventType];
+
+      for (var _nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
+        if (oEvtListeners.aEls[iElId] === this) {
+          _nElIdx = iElId;
+          break;
+        }
+      }
+
+      if (nElIdx === -1) {
+        oEvtListeners.aEls.push(this);
+        oEvtListeners.aEvts.push([fListener]);
+        this["on" + sEventType] = runListeners;
+      } else {
+        var aElListeners = oEvtListeners.aEvts[nElIdx];
+
+        if (this["on" + sEventType] !== runListeners) {
+          aElListeners.splice(0);
+          this["on" + sEventType] = runListeners;
+        }
+
+        for (var iLstId = 0; iLstId < aElListeners.length; iLstId++) {
+          if (aElListeners[iLstId] === fListener) {
+            return;
+          }
+        }
+
+        aElListeners.push(fListener);
+      }
+    } else {
+      oListeners[sEventType] = { aEls: [this], aEvts: [[fListener]] };
+      this["on" + sEventType] = runListeners;
+    }
+  };
+
+  Element.prototype.removeEventListener = function (sEventType, fListener) {
+    if (!oListeners.hasOwnProperty(sEventType)) {
+      return;
+    }
+
+    var oEvtListeners = oListeners[sEventType];
+
+    for (var _nElIdx2 = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
+      if (oEvtListeners.aEls[iElId] === this) {
+        _nElIdx2 = iElId;
+        break;
+      }
+    }
+
+    if (nElIdx === -1) {
+      return;
+    }
+
+    for (var iLstId = 0, aElListeners = oEvtListeners.aEvts[nElIdx]; iLstId < aElListeners.length; iLstId++) {
+      if (aElListeners[iLstId] === fListener) {
+        aElListeners.splice(iLstId, 1);
+      }
+    }
+  };
+}
+
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -226,5 +307,5 @@ if (!('classList' in Element.prototype)) {
   });
 }
 
-},{}]},{},[3])(3)
+},{}]},{},[2])(2)
 });

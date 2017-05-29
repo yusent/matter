@@ -2543,6 +2543,33 @@ html {
   }
 }
 
+@-webkit-keyframes ripple {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@-moz-keyframes ripple {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@-o-keyframes ripple {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 @keyframes ripple {
   from {
     transform: scale(0);
@@ -2581,11 +2608,20 @@ html {
 
 .raised-btn .ripple,
 .flat-btn .ripple {
-  animation: ripple 0.3s;
+  -webkit-animation: ripple 0.4s ease-out;
+  -moz-animation: ripple 0.4s ease-out;
+  -o-animation: ripple 0.4s ease-out;
+  animation: ripple 0.4s ease-out;
   background-color: rgba(0, 0, 0, 0.12);
   border-radius: 50%;
   position: absolute;
+  transition: opacity 0.6s;
   width: 200%;
+}
+
+.raised-btn .ripple.fading-out,
+.flat-btn .ripple.fading-out {
+  opacity: 0;
 }
 
 .raised-btn,

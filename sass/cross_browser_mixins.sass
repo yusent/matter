@@ -1,8 +1,26 @@
 =user-select($value)
-  -webkit-touch-callout: $value // iOS Safari
-  -webkit-user-select: $value   // Safari
-  -khtml-user-select: $value    // Konqueror HTML
-  -moz-user-select: $value      // Firefox
-  -ms-user-select: $value       // Internet Explorer/Edge
-  user-select: $value           // Non-prefixed version, currently supported by
-                                // Chrome and Opera
+  -webkit-touch-callout: $value
+  -webkit-user-select:   $value
+  -khtml-user-select:    $value
+  -moz-user-select:      $value
+  -ms-user-select:       $value
+  user-select:           $value
+
+=keyframes($animation-name)
+  @-webkit-keyframes #{$animation-name}
+    @content
+
+  @-moz-keyframes #{$animation-name}
+    @content
+
+  @-o-keyframes #{$animation-name}
+    @content
+
+  @keyframes #{$animation-name}
+    @content
+
+=animation($value)
+  -webkit-animation: $value
+  -moz-animation:    $value
+  -o-animation:      $value
+  animation:         $value
