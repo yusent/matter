@@ -9,8 +9,7 @@ exports.default = function (button) {
   var transitionEndHandler = function transitionEndHandler(event) {
     return button.removeChild(event.target);
   };
-
-  function unpressHandler() {
+  var unpressHandler = function unpressHandler() {
     var ripples = button.querySelectorAll('.ripple');
 
     var _iteratorNormalCompletion = true;
@@ -37,7 +36,7 @@ exports.default = function (button) {
         }
       }
     }
-  }
+  };
 
   button.addEventListener('transitionend', transitionEndHandler);
   button.addEventListener('webkitTransitionEnd', transitionEndHandler);

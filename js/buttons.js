@@ -1,13 +1,12 @@
 export default function (button) {
   let transitionEndHandler = event => button.removeChild(event.target);
-
-  function unpressHandler() {
+  let unpressHandler = () => {
     let ripples = button.querySelectorAll('.ripple');
 
     for (let ripple of ripples) {
       ripple.classList.add('fading-out');
     }
-  }
+  };
 
   button.addEventListener('transitionend', transitionEndHandler);
   button.addEventListener('webkitTransitionEnd', transitionEndHandler);
