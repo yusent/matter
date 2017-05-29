@@ -1,4 +1,4 @@
-@mixin col-classes($size, $columns: 12)
+=col-classes($size, $columns: 12)
   @for $i from 1 through $columns
     $percentage: $i / $columns * 100 + %
 
@@ -26,25 +26,25 @@
     &:last-child
       margin-right: $gutter
 
-    @include col-classes("xxs", 4)
+    +col-classes("xxs", 4)
 
     @media #{$xs-or-larger}
-      @include col-classes("xs", 4)
+      +col-classes("xs", 4)
 
     @media #{$s-or-larger}
-      @include col-classes("s", 8)
+      +col-classes("s", 8)
 
     @media #{$m-or-larger}
-      @include col-classes("m")
+      +col-classes("m")
 
     @media #{$l-or-larger}
-      @include col-classes("l")
+      +col-classes("l")
 
     @media #{$xl-or-larger}
-      @include col-classes("xl")
+      +col-classes("xl")
 
     @media #{$xxl-or-larger}
-      @include col-classes("xxl")
+      +col-classes("xxl")
 
     @media #{$xxxl-or-larger}
-      @include col-classes("xxxl")
+      +col-classes("xxxl")

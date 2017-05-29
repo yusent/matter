@@ -3,11 +3,6 @@ module.exports = function (config) {
     autoWatch: false,
     browserify: {
       debug: true,
-      transform: [
-        ['babelify', {
-          presets: ['es2015'],
-        }],
-      ],
     },
     client: {
       args: ['--grep', config.grep],
