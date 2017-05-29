@@ -2640,7 +2640,6 @@ html {
 .flat-btn {
   background: none;
   transition: background-color 0.3s ease-out;
-  will-change: background-color;
 }
 
 .flat-btn:active {
@@ -2649,7 +2648,6 @@ html {
 
 .raised-btn {
   background-color: #ff5722;
-  will-change: box-shadow;
 }
 
 .raised-btn:active:not([disabled]) {
