@@ -1,7 +1,6 @@
 if (!Element.prototype.addEventListener) {
   let oListeners = {};
-
-  function runListeners(oEvent) {
+  let runListeners = function (oEvent) {
     if (!oEvent) {
       oEvent = window.event;
     }
@@ -14,13 +13,15 @@ if (!Element.prototype.addEventListener) {
         break;
       }
     }
-  }
+  };
 
   Element.prototype.addEventListener = function (sEventType, fListener) {
     if (oListeners.hasOwnProperty(sEventType)) {
       let oEvtListeners = oListeners[sEventType];
+      let nElIdx;
+      let iElId;
 
-      for (let nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
+      for (nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
         if (oEvtListeners.aEls[iElId] === this) {
           nElIdx = iElId;
           break;
@@ -59,8 +60,10 @@ if (!Element.prototype.addEventListener) {
     }
 
     let oEvtListeners = oListeners[sEventType];
+    let nElIdx;
+    let iElId;
 
-    for (let nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
+    for (nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
       if (oEvtListeners.aEls[iElId] === this) {
         nElIdx = iElId;
         break;

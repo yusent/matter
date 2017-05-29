@@ -111,6 +111,7 @@ require('./polyfill/add-or-remove-event-listener');
 "use strict";
 
 if (!Element.prototype.addEventListener) {
+  var oListeners = {};
   var runListeners = function runListeners(oEvent) {
     if (!oEvent) {
       oEvent = window.event;
@@ -126,15 +127,15 @@ if (!Element.prototype.addEventListener) {
     }
   };
 
-  var oListeners = {};
-
   Element.prototype.addEventListener = function (sEventType, fListener) {
     if (oListeners.hasOwnProperty(sEventType)) {
       var oEvtListeners = oListeners[sEventType];
+      var nElIdx = void 0;
+      var iElId = void 0;
 
-      for (var _nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
+      for (nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
         if (oEvtListeners.aEls[iElId] === this) {
-          _nElIdx = iElId;
+          nElIdx = iElId;
           break;
         }
       }
@@ -171,10 +172,12 @@ if (!Element.prototype.addEventListener) {
     }
 
     var oEvtListeners = oListeners[sEventType];
+    var nElIdx = void 0;
+    var iElId = void 0;
 
-    for (var _nElIdx2 = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
+    for (nElIdx = -1, iElId = 0; iElId < oEvtListeners.aEls.length; iElId++) {
       if (oEvtListeners.aEls[iElId] === this) {
-        _nElIdx2 = iElId;
+        nElIdx = iElId;
         break;
       }
     }
