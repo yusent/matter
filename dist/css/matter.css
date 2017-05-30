@@ -2579,7 +2579,7 @@ html {
   }
 }
 
-.raised-btn, .flat-btn {
+.raised-btn, .flat-btn, .floating-action-btn {
   border: none;
   color: #000;
   cursor: pointer;
@@ -2600,11 +2600,16 @@ html {
   user-select: none;
 }
 
-.raised-btn::-moz-focus-inner, .flat-btn::-moz-focus-inner {
+.raised-btn::-moz-focus-inner, .flat-btn::-moz-focus-inner, .floating-action-btn::-moz-focus-inner {
   border: 0;
 }
 
-.raised-btn .ripple, .flat-btn .ripple {
+.raised-btn[disabled], .flat-btn[disabled], .floating-action-btn[disabled] {
+  color: rgba(0, 0, 0, 0.26);
+  pointer-events: none;
+}
+
+.raised-btn .ripple, .flat-btn .ripple, .floating-action-btn .ripple {
   -webkit-animation: ripple 0.4s ease-out;
   -moz-animation: ripple 0.4s ease-out;
   -o-animation: ripple 0.4s ease-out;
@@ -2616,7 +2621,7 @@ html {
   width: 200%;
 }
 
-.raised-btn .ripple.fading-out, .flat-btn .ripple.fading-out {
+.raised-btn .ripple.fading-out, .flat-btn .ripple.fading-out, .floating-action-btn .ripple.fading-out {
   opacity: 0;
 }
 
@@ -2632,6 +2637,23 @@ html {
   vertical-align: middle;
 }
 
+.raised-btn, .floating-action-btn {
+  background-color: #ff5722;
+  transition: box-shadow 0.4s;
+}
+
+.raised-btn[disabled], .floating-action-btn[disabled] {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.raised-btn:active:not([disabled]), .floating-action-btn:active:not([disabled]) {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.34);
+}
+
+.raised-btn:hover:not(:active):not([disabled]), .floating-action-btn:hover:not(:active):not([disabled]) {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
 .flat-btn {
   background: none;
   transition: background-color 0.3s ease-out;
@@ -2641,20 +2663,35 @@ html {
   background-color: rgba(153, 153, 153, 0.4);
 }
 
-.raised-btn {
-  background-color: #ff5722;
+.floating-action-btn {
+  border-radius: 50%;
+  bottom: 24px;
+  height: 56px;
+  padding: 0;
+  position: absolute;
+  right: 24px;
+  transition: bottom 0.3s, right 0.3s;
+  width: 56px;
 }
 
-.raised-btn:active:not([disabled]) {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.34);
+.floating-action-btn i {
+  font-size: 24px;
+  line-height: 56px;
 }
 
-.raised-btn:hover:not(:active):not([disabled]) {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+@media only screen and (max-width: 460px) {
+  .floating-action-btn {
+    height: 40px;
+    width: 40px;
+  }
+  .floating-action-btn i {
+    line-height: 40px;
+  }
 }
 
-.raised-btn[disabled] {
-  background-color: rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, 0.26);
-  pointer-events: none;
+@media only screen and (max-width: 599px) {
+  .floating-action-btn {
+    bottom: 16px;
+    right: 16px;
+  }
 }

@@ -5,7 +5,7 @@
   to
     transform: scale(1)
 
-.raised-btn, .flat-btn
+.raised-btn, .flat-btn, .floating-action-btn
   border: none
   color: #000
   cursor: pointer
@@ -22,6 +22,10 @@
 
   &::-moz-focus-inner
     border: 0
+
+  &[disabled]
+    color: rgba(#000, 0.26)
+    pointer-events: none
 
   .ripple
     +animation(ripple 0.4s ease-out)
@@ -45,15 +49,12 @@
   text-transform: uppercase
   vertical-align: middle
 
-.flat-btn
-  background: none
-  transition: background-color 0.3s ease-out
-
-  &:active
-    background-color: rgba(#999, 0.4)
-
-.raised-btn
+.raised-btn, .floating-action-btn
   background-color: $secondary-color
+  transition: box-shadow 0.4s
+
+  &[disabled]
+    background-color: rgba(#000, 0.12)
 
   &:active:not([disabled])
     box-shadow: 0 4px 8px rgba(#000, 0.34)
@@ -61,7 +62,35 @@
   &:hover:not(:active):not([disabled])
     box-shadow: 0 2px 2px 0 rgba(#000, 0.14), 0 3px 1px -2px rgba(#000, 0.2), 0 1px 5px 0 rgba(#000, 0.12)
 
-  &[disabled]
-    background-color: rgba(#000, 0.12)
-    color: rgba(#000, 0.26)
-    pointer-events: none
+.flat-btn
+  background: none
+  transition: background-color 0.3s ease-out
+
+  &:active
+    background-color: rgba(#999, 0.4)
+
+.floating-action-btn
+  border-radius: 50%
+  bottom: 24px
+  height: 56px
+  padding: 0
+  position: absolute
+  right: 24px
+  transition: bottom 0.3s, right 0.3s
+  width: 56px
+
+  i
+    font-size: 24px
+    line-height: 56px
+
+  @media only screen and (max-width: 460px)
+    &
+      height: 40px
+      width: 40px
+
+      i
+        line-height: 40px
+
+  @media #{$xs-or-smaller}
+    bottom: 16px
+    right: 16px
