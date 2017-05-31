@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import './polyfill';
 import initButton from './buttons';
 
