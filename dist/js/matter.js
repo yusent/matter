@@ -7,8 +7,11 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (button) {
   var transitionEndHandler = function transitionEndHandler(event) {
-    return button.removeChild(event.target);
+    if (event.propertyName === 'opacity') {
+      button.removeChild(event.target);
+    }
   };
+
   var unpressHandler = function unpressHandler() {
     var ripples = button.querySelectorAll('.ripple');
 

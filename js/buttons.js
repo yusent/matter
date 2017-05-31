@@ -1,5 +1,10 @@
 export default function (button) {
-  let transitionEndHandler = event => button.removeChild(event.target);
+  let transitionEndHandler = event => {
+    if (event.propertyName === 'opacity') {
+      button.removeChild(event.target);
+    }
+  };
+
   let unpressHandler = () => {
     let ripples = button.querySelectorAll('.ripple');
 
