@@ -31,13 +31,13 @@ if (!Element.prototype.addEventListener) {
       if (nElIdx === -1) {
         oEvtListeners.aEls.push(this);
         oEvtListeners.aEvts.push([fListener]);
-        this["on" + sEventType] = runListeners;
+        this['on' + sEventType] = runListeners;
       } else {
         let aElListeners = oEvtListeners.aEvts[nElIdx];
 
-        if (this["on" + sEventType] !== runListeners) {
+        if (this['on' + sEventType] !== runListeners) {
           aElListeners.splice(0);
-          this["on" + sEventType] = runListeners;
+          this['on' + sEventType] = runListeners;
         }
 
         for (var iLstId = 0; iLstId < aElListeners.length; iLstId++) {
@@ -50,7 +50,7 @@ if (!Element.prototype.addEventListener) {
       }
     } else {
       oListeners[sEventType] = { aEls: [this], aEvts: [ [fListener] ] };
-      this["on" + sEventType] = runListeners;
+      this['on' + sEventType] = runListeners;
     }
   };
 
