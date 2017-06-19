@@ -1,6 +1,6 @@
-let browserify = require('browserify');
-let fs = require('fs');
-let sass = require('node-sass');
+const browserify = require('browserify');
+const fs = require('fs');
+const sass = require('node-sass');
 
 sass.render({
   file: 'sass/matter.sass',
