@@ -309,6 +309,36 @@ $colors: (
   @return null;
 }
 
+@function luminisance($color) {
+  $rgb: (
+    'red'  : red($color),
+    'green': green($color),
+    'blue' : blue($color),
+  );
+
+  @each $component, $value in $rgb {
+    $adjusted: 0;
+    $value: $value / 255;
+
+    @if $value < 0.03928 {
+      $value: $value / 12.92;
+    } @else {
+      $value: ($value + 0.055) / 1.055;
+      $value: poly-pow($value, 2.4);
+    }
+
+    $rgb: map-merge($rgb, ($component: $value));
+  }
+
+  @return (map-get($rgb, 'red')   * 0.2126) +
+          (map-get($rgb, 'green') * 0.7152) +
+          (map-get($rgb, 'blue')  * 0.0722);
+}
+
+@function text-color-over($color) {
+  @return if(luminisance($color) > 0.179, #000, #fff);
+}
+
 @each $color_name, $color in $colors {
   @each $number, $color_value in $color {
     .#{$color_name}-#{$number} {
@@ -321,10 +351,12 @@ $colors: (
   }
 }
 
-$primary-color: color("deep-purple", "500") !default;
+$primary-color:       color("deep-purple", "500") !default;
 $primary-color-light: lighten($primary-color, 18%) !default;
-$primary-color-dark: darken($primary-color, 24%) !default;
+$primary-color-dark:  darken($primary-color, 24%) !default;
+$primary-color-text:  text-color-over($primary-color);
 
-$secondary-color: color("deep-orange", "500") !default;
+$secondary-color:       color("deep-orange", "500") !default;
 $secondary-color-light: lighten($secondary-color, 18%) !default;
-$secondary-color-dark: darken($secondary-color, 24%) !default;
+$secondary-color-dark:  darken($secondary-color, 24%) !default;
+$secondary-color-text:  text-color-over($secondary-color);

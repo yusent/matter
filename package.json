@@ -27,6 +27,7 @@
     "mocha-jshint": "^2.3.1",
     "node-sass": "^4.5.3",
     "phantomjs-prebuilt": "^2.1.14",
+    "sass-math-pow": "^0.1.4",
     "watchify": "^3.9.0"
   },
   "scripts": {
